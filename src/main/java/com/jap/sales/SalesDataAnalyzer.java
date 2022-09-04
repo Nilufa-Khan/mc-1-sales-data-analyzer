@@ -38,8 +38,11 @@ public class SalesDataAnalyzer {
     public List<SalesRecord> getAllCustomersSortedByPurchaseAmount(List<SalesRecord> salesData, AmountComparator amountComparator){
         List<SalesRecord> recordList = new ArrayList<>();
         Collections.sort(salesData,new AmountComparator());
+        for(SalesRecord sr : salesData){
+            recordList.add(sr);
+        }
 
-       return null;
+       return recordList;
     }
 
     // Find the top customer who spent the maximum time on the site
