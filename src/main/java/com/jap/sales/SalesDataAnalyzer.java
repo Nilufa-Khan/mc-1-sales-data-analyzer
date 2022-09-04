@@ -41,8 +41,8 @@ public class SalesDataAnalyzer {
         for(SalesRecord sr : salesData){
             recordList.add(sr);
         }
+        return  recordList;
 
-       return recordList;
     }
 
     // Find the top customer who spent the maximum time on the site
