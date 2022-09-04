@@ -19,14 +19,22 @@ public class SalesDataAnalyzer {
        try {
            fileReader = new FileReader(fileName);
            BufferedReader bufferedReader = new BufferedReader(fileReader);
-           String data = "" ;
-           String response = "";
+           String data = bufferedReader.readLine();
+
            while ((data = bufferedReader.readLine()) != null){
-                response = response + data;
-               salesRecords.add(new SalesRecord());
+               String[] sp = data.split(",");
+               String date = sp[0];
+               int customer_id = Integer.parseInt(sp[1]);
+               int productCategory = Integer.parseInt(sp[2]);
+               String paymentMethod = sp[3];
+               double amount = Double.parseDouble(sp[4]);
+               double timeOnSIte = Double.parseDouble(sp[5]);
+               int clicksInSite = Integer.parseInt(sp[6]);
+               salesRecords.add(new SalesRecord(date,customer_id,productCategory,paymentMethod,amount,timeOnSIte,clicksInSite));
 
            }
-       } catch (IOException e) {
+
+       }catch (IOException e){
            e.printStackTrace();
        }
 
@@ -36,19 +44,19 @@ public class SalesDataAnalyzer {
 
     // Sort the customers based on purchase amount
     public List<SalesRecord> getAllCustomersSortedByPurchaseAmount(List<SalesRecord> salesData, AmountComparator amountComparator){
-        List<SalesRecord> recordList = new ArrayList<>();
-        Collections.sort(salesData,new AmountComparator());
-        for(SalesRecord sr : salesData){
-            recordList.add(sr);
-        }
-        return  recordList;
+
+        Collections.sort(salesData,amountComparator);
+
+        return salesData;
 
     }
 
     // Find the top customer who spent the maximum time on the site
     public SalesRecord getTopCustomerWhoSpentMaxTimeOnSite(List<SalesRecord> salesData,TimeOnSiteComparator timeOnSiteComparator){
 
-        return null;
+        Collections.sort(salesData,timeOnSiteComparator);
+
+        return salesData.get(0); // return the 0th index value
     }
 
 
