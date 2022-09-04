@@ -1,8 +1,9 @@
 package com.jap.sales;
 
 
+import java.util.Comparator;
 
-public class SalesRecord {
+public class SalesRecord implements Comparator<SalesRecord> {
 
     private String date;
     private int customer_id;
@@ -96,5 +97,10 @@ public class SalesRecord {
                 ", time_on_site=" + time_on_site +
                 ", clicks_in_site=" + clicks_in_site +
                 '}';
+    }
+
+    @Override
+    public int compare(SalesRecord o1, SalesRecord o2) {
+        return 0;
     }
 }
